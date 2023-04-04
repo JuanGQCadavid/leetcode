@@ -1,0 +1,12 @@
+func successfulPairs(spells []int, potions []int, success int64) []int {
+	result := make([]int, len(spells))
+	for i, v := range spells {
+		for _, vv := range potions {
+			if int64(vv*v) >= success {
+				result[i]++
+			}
+		}
+	}
+
+	return result
+}

@@ -1,0 +1,64 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// import (
+// 	//"math"
+// 	"fmt"
+// 	"time"
+// )
+
+func search(nums []int, target int) int {
+	target_index := -1
+	upperLimit := float64(len(nums))
+	lowerLimit := float64(0)
+
+	lenFloat := float64(len(nums))
+
+	for {
+		// time.Sleep(2 * time.Second)
+
+		middlePoint := math.Ceil(lowerLimit + ((upperLimit - lowerLimit) / 2))
+
+		// fmt.Println(lowerLimit, middlePoint, upperLimit)
+
+		if lowerLimit > upperLimit || middlePoint >= lenFloat || middlePoint < 0 {
+			break
+		}
+
+		if nums[int(middlePoint)] == target {
+			// fmt.Println("On target!")
+			target_index = int(middlePoint)
+			break
+		}
+
+		if nums[int(middlePoint)] < target {
+			// fmt.Println(nums[int(middlePoint)], " < ", target)
+			lowerLimit = middlePoint
+
+		} else {
+			// fmt.Println(nums[int(middlePoint)], " > ", target)
+			upperLimit = middlePoint - 1
+		}
+	}
+
+	return target_index
+}
+
+func main() {
+	nums := []int{-1, 0, 3, 5, 9, 12}
+	target := 9
+	response := search(nums, target)
+	fmt.Println(response)
+
+	// for i, v := range nums {
+	// 	fmt.Println(i, v)
+	// 	response := search(nums, v)
+	// 	fmt.Println(response == i)
+	// }
+
+	// fmt.Println(5 / 2)
+}
